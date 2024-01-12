@@ -1,0 +1,175 @@
+{% extends 'temp.html' %}
+{% load static  %}
+{% block title %}
+<div class="title">Справка по трамваям </div>
+{% endblock %}
+{% block content %}
+ </section>
+    <section class="navigation">
+        <div class="navigation__container">
+            <div class="navigation__date">
+                <label for="finddate">Дата</label>
+                <input type="date" id="finddate">
+            </div>
+        </div>
+    </section>
+    <section class="form">
+        <div class="form__container">
+            <table><thead style="position: sticky; top: 0;"  class="main-head">
+                <tr>
+                  <th rowspan="2" class="slim light-grey">Маршрут</th>
+                  <th rowspan="2" class="slim light-grey">Депо</th>
+                  <th colspan="2" class="blue">Выход на 8:00/7:15</th>
+                  <th colspan="2" class="blue">Выход на 18:00</th>
+                  <th colspan="2" class="blue">Рейсы на текущую дату</th>
+
+                  <th colspan="7" class="beige">Причины невыполнения рейсов</th>
+                  <th rowspan="2" class="green">
+                    Рейсы вне плана(выполеннные другим депо или автобусом)
+                  </th>
+
+                  <th colspan="2" class="blue">
+                    Средняя участковая скорость, км/ч
+                  </th>
+                  <th rowspan="2" class="green">
+                    Действия
+                  </th>
+                </tr>
+                <tr>
+                    <th class="slim blue">План</th>
+                  <th class="slim blue">Факт</th>
+                  <th class="slim blue">План</th>
+                  <th class="slim blue">Факт</th>
+                  <th class="slim blue">План</th>
+                  <th class="slim blue">Факт</th>
+
+                  <th class="slim beige">Брак</th>
+
+                  <th class="beige">Задержка движения</th>
+
+                  <th class="beige">Снижение скоросит по ДКР и КР</th>
+
+                  <th class="beige">Снижение скорости</th>
+
+                  <th class="beige">Переключение по ТУ</th>
+
+                  <th class="beige">ИТОГО</th>
+                  <th class="beige">ИТОГО от плана рейсов, %</th>
+                  <th class="slim blue">План</th>
+                  <th class="slim blue">Факт</th>
+                </tr>
+                </thead>
+
+                <tr class="data_insert">
+                     {% for x in m%}
+                  <td
+                    class="route_number"
+
+                  >{{x.route}}</td>
+                  <td
+                    class="depo_name"
+                    rowspan="2"
+                  >{{x.depo }}</td>
+                  <td class="plan-7-15"></td>
+                    {% csrf_token %}
+                  <td class="fact-7-15"><input type="number" class="n1" readonly/>
+                </td>
+                  <td class="plan-18-00"></td>
+                  <td class="fact-18-00">
+                    <input type="number" class="n2" readonly/>
+                  </td>
+                  <td class="plan_today">
+                        {{x.plan1 }}
+                  </td>
+                  <td class="fact_today">
+                        {{x.exit1 }}
+                  </td>
+                  <td class="brak">
+                    <input type="number" class="n3" value=" {{t.brak }}"/>
+                  </td>
+                  <td class="delay">
+                    <input type="number" class="n4" readonly/>
+                  </td>
+                  <td class="speed-deceleration-dkr_kr">
+                    <input type="number" class="n5" readonly/>
+                  </td>
+                  <td class="speed-deceleration">
+                    <input type="number" class="n6" readonly/>
+                  </td>
+                  <td class="switch-tu">
+                    <input type="number" class="n7" readonly/>
+                  </td>
+                  <td class="total-by-route"> {{x.itogo }}</td>
+              <td class="total-by-route_percent">{{x.itogoproc }}</td>
+                  <td class="flights-off-the-plan">
+                    <input type="number" class="n8" readonly/>
+                  </td>
+                  <td class="average-speed-plan">
+                    <input type="number" class="n9" readonly/>
+                  </td>
+                  <td class="average-speed-fact">
+                    <input type="number" class="n10" readonly/>
+                  </td>
+                    {% endfor %}
+                  <td class="for-button">
+                    <button class="small-button save-data" hidden>Сохранить</button>
+                    <button class="small-button change-data" href="edit/{{p.id}}">Изменить</button>
+                  </td>
+                </tr>
+
+                <tr class="data_insert">
+                    {% for t in m %}
+                  <td
+                    class="route_number"
+                  >{{t.route }}</td>
+                  <td class="plan-7-15">{{t.exit1 }}</td>
+                  <td class="fact-7-15"><input type="number" class="n1" />
+                </td>
+                  <td class="plan-18-00">{{t.exit2 }}</td>
+                  <td class="fact-18-00">
+                    <input type="number" class="n2" />
+                  </td>
+                  <td class="plan_today">
+                        {{t.plan1 }}
+                  </td>
+                  <td class="fact_today">
+                        {{t.plan2 }}
+                  </td>
+                  <td class="brak">
+                    <input type="text" class="n3" value=" {{t.brak }}" />
+                  </td>
+                  <td class="delay">
+                    <input type="number" class="n4" />
+                  </td>
+                  <td class="speed-deceleration-dkr_kr">
+                    <input type="number" class="n5" />
+                  </td>
+                  <td class="speed-deceleration">
+                    <input type="number" class="n6" />
+                  </td>
+                  <td class="switch-tu">
+                    <input type="number" class="n7" />
+                  </td>
+                  <td class="total-by-route"></td>
+                    <td class="total-by-route_percent"></td>
+                  <td class="flights-off-the-plan">
+                    <input type="number" class="n8" />
+                  </td>
+                  <td class="average-speed-plan">
+                    <input type="number" class="n9" />
+                  </td>
+                  <td class="average-speed-fact">
+                    <input type="number" class="n10" />
+                  </td>
+                    {% endfor %}
+                  <td class="for-button">
+                    <button class="small-button save-data" type="submit" >Сохранить</button>
+                    <button class="small-button change-data" hidden>Изменить</button>
+                  </td>
+                </tr>
+
+        </div>
+
+    </section>
+
+{% endblock %}

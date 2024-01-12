@@ -1,0 +1,15 @@
+<h1>Add member</h1>
+
+<form action="" method="post">
+{% csrf_token %}
+id:<br>
+<input name="id_driver">
+<br><br>
+ Name:<br>
+<input name="name">
+<br><br>
+    Number:<br>
+    <input name="tram_number"/>
+    <button type="submit">Сохранить</button>
+    <a href="{% url 'drivers' %}">Назад</a>
+</form>

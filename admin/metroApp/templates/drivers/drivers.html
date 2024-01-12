@@ -1,0 +1,31 @@
+{% extends 'temp.html' %}
+{% block title %}
+<div class="title">Машинисты</div>
+{% endblock %}
+{% block content %}
+<table class="table table-striped">
+<thead>
+    <tr>
+        <th>id</th>
+        <th>ФИО</th>
+        <th>номер трамвая</th>
+
+    </tr>
+</thead>
+<tbody>
+
+    {% for i in d%}
+<tr>
+         <td>{{ i.id_driver}}</td>
+        <td>{{ i.name }}</td>
+        <td>{{ i.tram_number }}</td>
+     <td><a href="{% url 'delete' %}">Добавить</a> | <a href="{% url 'delete' %}" >Удалить</a></td>
+
+    {% endfor %}
+
+<a href="{% url 'add' %}">Добавить</a>
+
+</tbody>
+    <b
+
+{% endblock %}

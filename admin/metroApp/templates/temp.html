@@ -1,0 +1,60 @@
+{% load static  %}
+<!DOCTYPE html>
+<html lang="rus">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Метро</title>
+        <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"/>
+    </head>
+    <body>
+<div class="header"  >
+    {% block title %}
+
+{% endblock %}
+<ul class = "menu">
+    <a href="{% url 'contacts' %}">
+    <button class = "button" type="button">Контакты</button>
+</a>
+     <a href="{% url 'info' %}">
+    <button class = "button" type="button">Инфо</button>
+</a>
+
+    <a href="/spravka/something">
+    <button class = "button" type="button">Справка по трамваям </button>
+</a>
+
+  <a href="{% url 'home' %}">
+    <button class = "button" type="button">Главная</button>
+</a>
+     <a href="{% url 'schema' %}">
+    <button class = "button" type="button">Схема метро</button>
+</a>
+      <a href="{% url 'drivers' %}">
+    <button class = "button" type="button">Машинисты</button>
+</a>
+
+</ul>
+</div>
+
+<div class = 'container-fluid'>
+
+{% block content %}
+
+{% endblock %}
+</div>
+
+
+<footer class="footer">
+    <div class="footer__logo">
+        <img src="{% static 'edc_logo.png' %}" height="80px" alt="Логотип метро">
+    </div>
+    <div class="footer__pattern">
+        <img src=" {% static 'footer_line.png' %}" width="1500px" alt="Логотип узор">
+    </div>
+</footer>
+    </body>
+
+</html>
